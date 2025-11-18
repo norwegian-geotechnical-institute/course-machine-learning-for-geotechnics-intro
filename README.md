@@ -57,4 +57,4 @@ Some of the key features of the project are:
 
 The project is developed by Tom F. Hansen.
 
-For any questions or suggestions, please open an issue or contact us at [tom.frode.hansen@ngi.no](mailto:tom.frode.hansen@ngi.no).
+<!-- For any questions or suggestions, please open an issue or contact us at [tom.frode.hansen@ngi.no](mailto:tom.frode.hansen@ngi.no). -->
