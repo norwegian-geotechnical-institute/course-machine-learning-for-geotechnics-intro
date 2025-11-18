@@ -1,0 +1,45 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+
+# Data files (students download these)
+data/raw/*.csv
+data/raw/*.zip
+data/raw/*.tar.gz
+data/model_ready/*.csv
+
+# Keep directory structure
+!data/raw/.gitkeep
+!data/model_ready/.gitkeep
+
+# ydata-profiling reports
+notebooks/*.html
+notebooks/profiling_reports/*.html
+
+# IDE
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Ruff
+.ruff_cache/

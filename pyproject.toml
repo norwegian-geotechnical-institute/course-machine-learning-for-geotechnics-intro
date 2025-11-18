@@ -1,0 +1,18 @@
+[project]
+name = "course-machine-learning-for-geotechnics-intro"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "imbalanced-learn>=0.14.0",
+    "ipykernel>=7.1.0",
+    "jupyter>=1.1.1",
+    "matplotlib>=3.10.0",
+    "pandas>=2.3.3",
+    "pyod>=2.0.5",
+    "ruff>=0.14.5",
+    "scikit-learn>=1.7.2",
+    "xgboost>=3.1.1",
+    "ydata-profiling>=4.17.0",
+]
