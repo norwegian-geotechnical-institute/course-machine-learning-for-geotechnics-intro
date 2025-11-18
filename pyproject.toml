@@ -9,6 +9,7 @@ dependencies = [
     "ipykernel>=7.1.0",
     "jupyter>=1.1.1",
     "matplotlib>=3.10.0",
+    "nbstripout>=0.8.1",
     "pandas>=2.3.3",
     "pyod>=2.0.5",
     "ruff>=0.14.5",

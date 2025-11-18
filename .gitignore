@@ -26,8 +26,8 @@ data/model_ready/*.csv
 !data/model_ready/.gitkeep
 
 # ydata-profiling reports
-notebooks/*.html
-notebooks/profiling_reports/*.html
+*.html
+profiling_reports/*.html
 
 # IDE
 .vscode/*

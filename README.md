@@ -2,7 +2,7 @@
 
 The code is developed for use in a machine learning intro course at the Norwegian Geotechnical Institute (NGI): [https://www.ngi.no/](https://www.ngi.no/). For more information about geotechnical data and applied machine learning, check out this NGI course: [Introduction to Machine Learning in Geotechnics](https://www.ngi.no/en/events/ngi-code-academy/introduction-to-machine-learning-in-geotechnics-pilot-course/)
 
-Several Jupyter notebooks exemplify key machine learning concepts using geotechnical data. The notebooks are located in the `notebooks/` directory.
+Several Jupyter notebooks exemplify key machine learning concepts using geotechnical data. The notebooks are numbered sequentially in the repository root.
 
 The dataset used in this project is the Oberhollenzer CPT dataset, which is a publicly available dataset containing Cone Penetration Test (CPT) data along with corresponding soil type classifications. The dataset is stored in the `data/raw/` directory.
 
@@ -48,13 +48,11 @@ Some of the key features of the project are:
 
 ### Prepare the data
 
-1. Run the `notebooks/setup.ipynb` notebook to download and extract the Oberhollenzer dataset.
-2. Run the `notebooks/eda_cpt.ipynb` notebook to preprocess the data and generate exploratory data analysis reports. The preprocessed data will be saved in the `data/model_ready/` directory.
-3. Explore machine learning fundamentals with the `notebooks/metrics_and_ml_intro.ipynb` notebook.
-4. Train and evaluate models by running the `notebooks/training_evaluation.ipynb` notebook.
+1. Run the `00_setup.ipynb` notebook to download and extract the Oberhollenzer dataset.
+2. Run the `01_eda_cpt.ipynb` notebook to preprocess the data and generate exploratory data analysis reports. The preprocessed data will be saved in the `data/model_ready/` directory.
+3. Explore machine learning fundamentals with the `02_metrics_and_ml_intro.ipynb` notebook.
+4. Train and evaluate models by running the `03_training_evaluation.ipynb` notebook.
 
 ## Contact
 
-The project is developed by Tom F. Hansen.
-
-<!-- For any questions or suggestions, please open an issue or contact us at [tom.frode.hansen@ngi.no](mailto:tom.frode.hansen@ngi.no). -->
+The project is developed by Tom F. Hansen: [Mail](mailto:tom.frode.hansen@ngi.no)
