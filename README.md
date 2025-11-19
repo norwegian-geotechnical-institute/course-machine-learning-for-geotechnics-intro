@@ -37,7 +37,7 @@ Some of the key features of the project are:
     git clone https://github.com/norwegian-geotechnical-institute/course-machine-learning-for-geotechnics-intro.git
     cd course-machine-learning-for-geotechnics-intro
     ```
-2. **Install uv**: Follow the instructions at [https://uv.dev/](https://uv.dev/) to install uv.
+2. **Install uv**: Follow the instructions at [https://docs.astral.sh/uv/](https://docs.astral.sh/uv/) to install uv.
 
 3. **Install dependencies**:
     ```sh

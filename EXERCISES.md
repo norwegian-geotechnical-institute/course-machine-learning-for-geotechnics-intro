@@ -104,15 +104,152 @@ After completing the exercise, we will discuss:
 
 ## Exercise 3: Data Leakage Demonstration
 
-Part 1 (in 01_eda_cpt.ipynb): create a "leaky" split by using standard train_test_split() without grouping by drillhole IDs, then verify that many drillholes are split between train and test sets.
+**Location**: Split between `01_eda_cpt.ipynb` (Part 1) and `03_training_evaluation.ipynb` (Part 2)  
+**Time**: 25 minutes  
+**Format**: Individual coding exercise with group discussion
 
-Part 2 (in 03_training_evaluation.ipynb): train the same KNN model on the leaky data and compare metrics with the properly split data.
+### Task
 
-Key Learning Points:
+Demonstrate the impact of data leakage by comparing two train/test split approaches:
+1. **Leaky split**: Using standard `train_test_split()` without respecting drillhole IDs
+2. **Proper split**: Using ID-based splitting to prevent data leakage
 
-Demonstrates how data leakage inflates performance metrics (typically 10-20%+ improvement)
-Shows why domain knowledge matters in ML (spatially correlated data)
-Emphasizes real-world consequences of overoptimistic model evaluation
-Includes verification code to check for shared drillhole IDs
-Requires written analysis comparing both approaches
-The exercise is positioned as the final one, providing a powerful demonstration of why the ID-based splitting method we showed earlier is essential for this type of data.
+This exercise shows why domain knowledge is critical in machine learning and how data leakage can lead to overoptimistic model evaluations.
+
+### Part 1: Creating a Leaky Split (in `01_eda_cpt.ipynb`)
+
+**Instructions:**
+
+1. **Create a leaky train/test split**:
+   - Use standard `train_test_split()` on the cleaned dataset
+   - Split ratio: 75% train, 25% test
+   - Set `random_state=42` for reproducibility
+
+2. **Verify the data leakage**:
+   - Check how many unique drillhole IDs (`CPT_ID`) are in the training set
+   - Check how many unique drillhole IDs are in the test set
+   - Find the overlap: which drillhole IDs appear in BOTH train and test sets?
+   - Calculate the percentage of drillholes that are split across both sets
+
+3. **Save the leaky datasets**:
+   ```python
+   dataset_train_leaky.csv
+   dataset_test_leaky.csv
+   ```
+
+**Code Template:**
+
+```python
+from sklearn.model_selection import train_test_split
+
+# 1. Create leaky split (ignoring CPT_ID)
+df_train_leaky, df_test_leaky = train_test_split(
+    df_cleaned, 
+    test_size=0.25, 
+    random_state=42
+)
+
+# 2. Check for leakage
+train_ids = set(df_train_leaky["CPT_ID"].unique())
+test_ids = set(df_test_leaky["CPT_ID"].unique())
+shared_ids = train_ids.intersection(test_ids)
+
+print(f"Training set: {len(train_ids)} unique drillholes")
+print(f"Test set: {len(test_ids)} unique drillholes")
+print(f"Shared drillholes: {len(shared_ids)}")
+print(f"Percentage of drillholes split: {len(shared_ids)/len(train_ids.union(test_ids))*100:.1f}%")
+
+# 3. Save the datasets
+# Your code here
+```
+
+### Part 2: Comparing Model Performance (in `03_training_evaluation.ipynb`)
+
+**Instructions:**
+
+1. **Load the leaky datasets** from Part 1
+
+2. **Train the same KNN model** (k=5) on the leaky training data:
+   - Use the same imblearn pipeline with StandardScaler, RandomUnderSampler, and SMOTE
+   - Use the same features and target variable
+
+3. **Evaluate on the leaky test set**:
+   - Make predictions
+   - Generate a classification report
+   - Calculate the overall accuracy
+
+4. **Compare results**:
+   - Create a comparison table showing metrics from:
+     - **Proper split** (from earlier in the notebook)
+     - **Leaky split** (from this exercise)
+   - Calculate the difference in performance
+
+5. **Write your analysis** (2-3 paragraphs):
+   - Why are the metrics higher with the leaky split?
+   - What real-world problem does this represent?
+   - Why is the ID-based split method essential for CPT data?
+
+**Code Template:**
+
+```python
+# 1. Load leaky datasets
+df_train_leaky = pd.read_csv("data/model_ready/dataset_train_leaky.csv")
+df_test_leaky = pd.read_csv("data/model_ready/dataset_test_leaky.csv")
+
+# 2. Prepare features and target
+X_train_leaky = df_train_leaky[FEATURES]
+y_train_leaky = df_train_leaky[LABELS]
+X_test_leaky = df_test_leaky[FEATURES]
+y_test_leaky = df_test_leaky[LABELS]
+
+# 3. Train KNN model (same pipeline as before)
+# Your code here
+
+# 4. Generate predictions and classification report
+# Your code here
+
+# 5. Create comparison table
+comparison = pd.DataFrame({
+    "Split Method": ["Proper (ID-based)", "Leaky (random)"],
+    "Accuracy": [proper_accuracy, leaky_accuracy],
+    "Macro Avg F1": [proper_f1, leaky_f1]
+})
+print(comparison)
+```
+
+### Expected Results
+
+You should observe:
+- **10-20% improvement** in metrics with the leaky split
+- **Many drillholes split** between train and test (typically 60-80% overlap)
+- **Artificially inflated performance** due to data leakage
+
+### Discussion Points
+
+After completing the exercise, we will discuss:
+
+1. **What is data leakage?**
+   - How does it occur in geotechnical data?
+   - Why are measurements from the same drillhole correlated?
+
+2. **Why are metrics inflated?**
+   - The model sees very similar data in both train and test
+   - Spatial autocorrelation in CPT measurements
+
+3. **Real-world consequences:**
+   - Overconfident model deployment
+   - Poor performance on truly new boreholes
+   - Loss of stakeholder trust
+
+4. **Prevention strategies:**
+   - Always use ID-based splitting for grouped data
+   - Understand your data structure before splitting
+   - Document your splitting methodology
+
+### Key Learning Points
+
+- **Data leakage inflates performance metrics** (typically 10-20%+ improvement)
+- **Domain knowledge matters in ML** - understanding spatial correlation in CPT data is crucial
+- **Real-world consequences** of overoptimistic model evaluation can be severe
+- **Verification is essential** - always check for shared IDs between train/test sets
+- **Proper data splitting** is as important as model selection for geotechnical applications
